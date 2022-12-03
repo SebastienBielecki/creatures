@@ -1,3 +1,9 @@
+## Personal notes
+ERC721 deployed on Goerli at 0x49c0285f5557146D6708d7D323519BA4101b0AaF
+See on Opensea at https://testnets.opensea.io/collection/creature-wsvr7tto60
+
+
+
 ## OpenSea Creatures - Starter ERC721, ERC1155, and factory contracts
 
 What's included:
