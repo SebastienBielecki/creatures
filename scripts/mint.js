@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const HDWalletProvider = require("truffle-hdwallet-provider");
 const web3 = require("web3");
 const MNEMONIC = process.env.MNEMONIC;
@@ -7,7 +9,7 @@ const FACTORY_CONTRACT_ADDRESS = process.env.FACTORY_CONTRACT_ADDRESS;
 const NFT_CONTRACT_ADDRESS = process.env.NFT_CONTRACT_ADDRESS;
 const OWNER_ADDRESS = process.env.OWNER_ADDRESS;
 const NETWORK = process.env.NETWORK;
-const NUM_CREATURES = 12;
+const NUM_CREATURES = 2;
 const NUM_LOOTBOXES = 4;
 const DEFAULT_OPTION_ID = 0;
 const LOOTBOX_OPTION_ID = 2;
@@ -59,7 +61,7 @@ const FACTORY_ABI = [
 
 async function main() {
   const network =
-    NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "rinkeby";
+    NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "goerli";
   const provider = new HDWalletProvider(
     MNEMONIC,
     isInfura
@@ -91,18 +93,28 @@ async function main() {
       console.log("Minted lootbox. Transaction: " + result.transactionHash);
     }
   } else if (NFT_CONTRACT_ADDRESS) {
+    //console.log("enter case BFT Contract address");
     const nftContract = new web3Instance.eth.Contract(
       NFT_ABI,
       NFT_CONTRACT_ADDRESS,
-      { gasLimit: "1000000" }
+      { gasLimit: "5000000" }
     );
-
+    //console.log(nftContract);
     // Creatures issued directly to the owner.
     for (var i = 0; i < NUM_CREATURES; i++) {
-      const result = await nftContract.methods
+      console.log(`Create creature ${i} of ${NUM_CREATURES}`);
+      try {
+        console.log(nftContract.methods);
+        console.log(OWNER_ADDRESS);
+        const result = await nftContract.methods
         .mintTo(OWNER_ADDRESS)
-        .send({ from: OWNER_ADDRESS });
-      console.log("Minted creature. Transaction: " + result.transactionHash);
+        .send({ from: OWNER_ADDRESS, gas: 5000000 });
+        console.log(result);
+        console.log("Minted creature. Transaction: " + result.transactionHash);
+      } catch (error) {
+        console.log(error);
+      }
+     
     }
   } else {
     console.error(

@@ -14,7 +14,7 @@ contract Creature is ERC721Tradable {
     {}
 
     function baseTokenURI() override public pure returns (string memory) {
-        return "https://creatures-api.opensea.io/api/creature/";
+        return "https://test-express-generator.onrender.com/";
     }
 
     function contractURI() public pure returns (string memory) {
