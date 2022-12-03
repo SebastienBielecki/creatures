@@ -1,3 +1,7 @@
+
+require('dotenv').config()
+
+
 const HDWalletProvider = require("truffle-hdwallet-provider");
 
 const MNEMONIC = process.env.MNEMONIC;
@@ -14,8 +18,8 @@ if ((!MNEMONIC || !NODE_API_KEY) && needsNodeAPI) {
   process.exit(0);
 }
 
-const rinkebyNodeUrl = isInfura
-  ? "https://rinkeby.infura.io/v3/" + NODE_API_KEY
+const goerliNodeUrl = isInfura
+  ? "https://goerli.infura.io/v3/" + NODE_API_KEY
   : "https://eth-rinkeby.alchemyapi.io/v2/" + NODE_API_KEY;
 
 const mainnetNodeUrl = isInfura
@@ -30,12 +34,12 @@ module.exports = {
       gas: 5000000,
       network_id: "*", // Match any network id
     },
-    rinkeby: {
+    goerli: {
       provider: function () {
-        return new HDWalletProvider(MNEMONIC, rinkebyNodeUrl);
+        return new HDWalletProvider(MNEMONIC, goerliNodeUrl);
       },
       gas: 5000000,
-      network_id: 4,
+      network_id: 5,
     },
     live: {
       network_id: 1,
