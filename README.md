@@ -4,7 +4,7 @@ ERC721 deployed on Goerli at 0x49c0285f5557146D6708d7D323519BA4101b0AaF
 See on Opensea at https://testnets.opensea.io/collection/creature-wsvr7tto60
 <br>
 NFT metadatas are provided by the server running at https://test-express-generator.onrender.com/{tokenID}
-(tkenId need to be 1, 2, or 3)
+(tokenID needs to be 1, 2, or 3)
 
 
 
